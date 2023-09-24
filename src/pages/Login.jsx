@@ -1,9 +1,21 @@
-import React from 'react'
+import React from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  return (
-    <div>Login Page</div>
-  )
-}
+  const { setToken } = useAuth();
+  const navigate = useNavigate();
 
-export default Login
+  const handleLogin = () => {
+    setToken("this is a test token");
+    navigate("/", { replace: true });
+  };
+
+  setTimeout(() => {
+    handleLogin();
+  }, 3 * 1000);
+
+  return <div>Login Page</div>;
+};
+
+export default Login;

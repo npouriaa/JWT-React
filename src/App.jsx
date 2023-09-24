@@ -1,10 +1,11 @@
-import React from 'react'
-import './App.css'
-
+import AuthContextProvider from "./context/AuthContext";
+import Routes from "./routes";
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <AuthContextProvider>
+      <Routes />
+    </AuthContextProvider>
+  );
+};
 
-export default App
+export default App;

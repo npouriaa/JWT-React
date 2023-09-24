@@ -1,5 +1,5 @@
-import { createContext, useMemo, useEffect, useContext, useState } from "react";
 import axios from "axios";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -10,19 +10,23 @@ const AuthContextProvider = ({ children }) => {
     setToken_(newToken);
   };
 
-  const contextValue = useMemo(() => {
-    token, setToken;
-  }, [token]);
-
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common["Authorization"] = "Bearer" + token;
-      localStorage.setItem("token", token);
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+      localStorage.setItem('token',token);
     } else {
       delete axios.defaults.headers.common["Authorization"];
-      localStorage.removeItem("token");
+      localStorage.removeItem('token')
     }
   }, [token]);
+
+  const contextValue = useMemo(
+    () => ({
+      token,
+      setToken,
+    }),
+    [token]
+  );
 
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
