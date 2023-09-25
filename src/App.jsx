@@ -1,11 +1,5 @@
-import AuthContextProvider from "./context/AuthContext";
-import Routes from "./routes";
 const App = () => {
-  return (
-    <AuthContextProvider>
-      <Routes />
-    </AuthContextProvider>
-  );
+  return <div className="">App</div>;
 };
 
 export default App;
