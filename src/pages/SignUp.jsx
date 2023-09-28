@@ -23,6 +23,23 @@ const SignUp = () => {
       >
         <Input />
       </Form.Item>
+      <Form.Item
+        label="Email"
+        name="email"
+        className="form-item"
+        rules={[
+          {
+            required: true,
+            message: "Please input your email!",
+          },
+          {
+            type: "email",
+            message: "Please enter a valid email address!",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
 
       <Form.Item
         label="Password"
