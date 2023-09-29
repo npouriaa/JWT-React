@@ -1,39 +1,13 @@
 import { Button, Form, Input } from "antd";
 import React, { useState } from "react";
-import authService from "../services/auth.service";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
-
-  const handleSignup = (e) => {
-    e.preventDefault();
-    setMessage("");
-    setSuccessful(false);
-
-    authService.register(username, email, password).then((response) => {
-      setMessage(response.data.message);
-      setSuccessful(true);
-    }),
-      (error) => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
-        setSuccessful(false);
-        setMessage(resMessage);
-      };
-  };
 
   return (
     <Form
-      onFinish={(e) => handleSignup(e)}
       className="form"
       labelCol={{
         span: 8,
