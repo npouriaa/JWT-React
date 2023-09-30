@@ -1,9 +1,13 @@
-import React from 'react'
+import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { history } from "../_helpers/history";
 
-const PrivateRoutes = () => {
-  return (
-    <div>PrivateRoutes</div>
-  )
-}
+export { PrivateRoute };
 
-export default PrivateRoutes
+const PrivateRoute = ({ children }) => {
+  const { user: authUser } = useSelector((x) => x.auth);
+  if (!authUser) {
+    return <Navigate to="/login" state={{ from: history.location }} />;
+  }
+  return children;
+};
