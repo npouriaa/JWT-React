@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { history, fetchWrapper } from "_helpers";
+import { fetchWrapper } from "../_helpers/fetch-wrapper";
+import { history } from "../_helpers/history";
 
 // create slice
+
 const name = "auth";
 const initialState = createInitialState();
 const reducers = createReducers();
@@ -38,7 +40,7 @@ function createReducers() {
 }
 
 function createExtraActions() {
-  const baseUrl = `${process.env.REACT_APP_API_URL}/users`;
+  const baseUrl = `${import.meta.env.VITE_REACT_APP_API_URL}/users`;
 
   return {
     login: login(),

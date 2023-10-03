@@ -1,4 +1,4 @@
-import { store, authActions } from "_store";
+import { store, authActions } from "../redux/store";
 
 export const fetchWrapper = {
   get: request("GET"),
@@ -7,7 +7,7 @@ export const fetchWrapper = {
   delete: request("DELETE"),
 };
 
-const request = (method) => {
+function request(method) {
   return (url, body) => {
     const requestOptions = {
       method,
@@ -19,11 +19,11 @@ const request = (method) => {
     }
     return fetch(url, requestOptions).then(handleResponse);
   };
-};
+}
 
 // helper functions
 
-const authHeader = (url) => {
+function authHeader(url) {
   // return auth header with jwt if user is logged in and request is to the api url
   const token = authToken();
   const isLoggedIn = !!token;
@@ -33,13 +33,13 @@ const authHeader = (url) => {
   } else {
     return {};
   }
-};
+}
 
-const authToken = () => {
+function authToken() {
   return store.getState().auth.user?.token;
-};
+}
 
-const handleResponse = (response) => {
+function handleResponse(response) {
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
 
@@ -56,4 +56,4 @@ const handleResponse = (response) => {
 
     return data;
   });
-};
+}
